@@ -1,20 +1,25 @@
+
 # theLook Final Analysis
 
 ## The Task
 This analysis has been prepared for theLook, a (fictitious) online boutique founded in January 2019 by the Google Looker team (as a synthetic dataset). Although theLook has seen strong sales and revenue since its founding, roughly doubling its revenue every year, the site has seen experienced consistently high return rates. Though never beloved among ecommerce retailers, returns have increasingly become a thorn in their side since the COVID-19 pandemic, attacking profit margins, increasing waste and emissions, and causing logistics headaches. But as ecommerce giant [Shopify](https://www.shopify.com/enterprise/ecommerce-returns) wrote, “Ecommerce returns can be a disease…but they don’t have to be the plague.” After all, the returns platform [Loop](https://www.loopreturns.com/blog/customers-repeat-puchase-when-they-refund/) found that customers who make returns are both more likely to make another purchase and more likely to do so sooner than those who kept their original order. Looking to understand the patterns underlying its returns and seek to minimize them, theLook asked me to take a look at its (synthetic) internal data on returns to understand what’s being returned, who’s returning it, and what impact it has on revenue and customer loyalty – and where theLook can go from there to improve its return rate and, if returns are an inevitability in the 2020s, ensuring they improve, rather than detract from, the customer experience.
+
 This analysis was originally created for the Google Data Analytics Certificate capstone project in August 2023 and was updated and put online in January 2024.
 
 
 ## Data Used
 TheLook offered me access to [their database](https://console.cloud.google.com/marketplace/product/bigquery-public-data/thelook-ecommerce), which is hosted on BigQuery Public Data. The data are split across seven tables comprising distribution_centers, events, inventory_items, order_items, orders, products, and users, which I then queried using SQL on BigQuery. 
+
 I focused my analysis only on Complete and Returned orders, filtering out those that were cancelled or were still in processing and shipping. Due to the nature of the synthetic data, orders that are processing or shipping are never delivered, making them unhelpful for analysis. Cancelled orders, while potentially interesting, are beyond the scope of this analysis.)
+
 I only looked at orders that were delivered or returned from the store’s founding on January 1, 2019, to on or before August 31, 2023.
 Note that theLook’s data is synthetic and refreshes daily. The values I pulled will not match future data.
 
 
 ### Data Cleaning Notes
 To narrow the scope of my analysis and avoid issues stemming from the synthetic data (which generates order statuses and does not update them), I focused only on orders whose order statuses were marked as Complete or Returned. I filtered out orders that were cancelled, in processing, or currently shipping. When product categories were analyzed, categories with fewer than 100 orders were removed (in this case, only Jumpsuits & Rompers), while duplicate categories (“Suits” and “Suits & Sport Coats,” “Socks” and “Socks & Hosiery,” and “Pants” and “Pants & Capris”) were combined. This left 45,426 distinct items purchased across 21 categories.
-![Bar graph titled "Lifetime Purchases by Category, through August 2023"]('https://64.media.tumblr.com/7011812e8d4047eece86b703efd766ea/tumblr_inline_s7gqfbqa5V1vy3o8a_500.png')
+
+![Bar graph titled "Lifetime Purchases by Category, through August 2023"](https://64.media.tumblr.com/7011812e8d4047eece86b703efd766ea/tumblr_inline_s7gqfbqa5V1vy3o8a_500.png)
 
 ## The Analysis
 ### Background
@@ -42,9 +47,11 @@ Finally, while the national [rate of return for bags and accessories](https://ww
 
 ### Lost Sales
 Using the total sale prices of returned products, we find that theLook has lost over $750,000 in sales from returns since its founding through August 2023, accounting for more than 28% of its total sales and $391,000 in lost revenue. This is far above the average amount of merchandise returned as a percent of total online sales, which the National Retail Federation estimates to be just 16.5%. 
+
 ![Horizontal bar graph entitled "Share of Returns in Total Sales at theLook vs. U.S. eCommerce (estimated)"](https://64.media.tumblr.com/3d9cdceeffeff898293ae8beff425dd8/tumblr_inline_s7gqrvb80A1vy3o8a_500.png)
 
 TheLook did not share shipping and restocking costs with me, but it is very likely that they pose a significant burden on revenue. It is estimated that [as much as 60%](https://www.ecommercetimes.com/story/retailers-wrestling-with-returns-mull-restocking-fees-176893.html) of returned goods are unsellable, leading to wasted merchandise totaling hundreds of thousands of dollars – without including the shipping costs or restocking fees. Ultimately, theLook has made one million dollars in profit over its lifetime, and it stands to make nearly $400,000 more if it is able to resell all returned merchandise (less shipping and restocking costs) – but it also stands to lose more than $200,000 on returns should 60% be unsellable.
+
 ![Bar graph entitled "Lifetime Profit and Potential Losses at theLook"](https://64.media.tumblr.com/6054e726e216fc6d0726a23bc7a38ce8/tumblr_inline_s7gqrlixog1vy3o8a_500.png)
 
 ## Recommendations and Additional Deliverables
